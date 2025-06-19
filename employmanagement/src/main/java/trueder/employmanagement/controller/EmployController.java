@@ -3,6 +3,7 @@ package trueder.employmanagement.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,9 @@ import trueder.employmanagement.model.Employ;
 
 @RestController
 public class EmployController {
-
+	
+	@Value("myproperty.name")
+	private String name;
 	private static  ArrayList<Employ> empList = new ArrayList<>();	
 	
 	@GetMapping("/getText")
