@@ -1,4 +1,4 @@
-package trueder.employmanagement;
+package trueder.employmanagement.repository;
 
 import java.util.List;
 
@@ -12,8 +12,7 @@ import trueder.employmanagement.model.Employ;
 public interface EmployRepository extends JpaRepository<Employ, Integer> {
 
 	
-	List<Employ>  findByEmployDesignation(String employDesignation);	
-	
+	List<Employ>  findByEmployDesignation(String employDesignation);		
 	
 	@Query(nativeQuery = true,value = "select * from emp_details  where employ_Designation = :empDesignation and  employ_Salary >=:empSalary  ")
 	
