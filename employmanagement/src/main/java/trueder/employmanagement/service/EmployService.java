@@ -1,6 +1,7 @@
 package trueder.employmanagement.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,4 +43,31 @@ public class EmployService {
 		}
 	}
 	
-}
+	public String updateEmployDetails(Employ newEmployData) {
+       
+        Optional<Employ> optionalEmploy = employRepository.findById(newEmployData.getEmployId());
+
+        if (optionalEmploy.isPresent()) {
+            Employ existingEmploy = optionalEmploy.get();
+
+            existingEmploy.setEmployName(newEmployData.getEmployName());
+            existingEmploy.setEmployDesignation(newEmployData.getEmployDesignation());
+            existingEmploy.setEmploySalary(newEmployData.getEmploySalary());
+
+            employRepository.save(existingEmploy);
+
+            return "Successfully Updated";
+        } else {
+            return "Record Not Found with ID: " + newEmployData.getEmployId();
+        }
+    }
+
+    public String deleteEmployDetails(int employId) {
+        if (employRepository.existsById(employId)) {
+            employRepository.deleteById(employId);
+            return "Successfully Deleted";
+        } else {
+            return "Record Not Found with ID: " + employId;
+        }
+    }
+}	
